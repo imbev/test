@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
     branches:
-      - main
+      - master
     paths-ignore:
       - '**/README.md'
   workflow_dispatch:
@@ -39,7 +39,7 @@ jobs:
     if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
     uses: AlmaLinux/atomic-ci/.github/workflows/build-iso.yml@dev/v12
     with:
-      image: ${{ needs.build-image.outputs.image-ref }}@${{ needs.build-image.outputs.digest }}
+      image: ${{ needs.build-image.outputs.image-ref }}:${{ github.ref_name }}
       image-name: ${{ github.event.repository.name }}
       # Installed systems track the tag build-image.yml pushes for this branch.
       update-origin-ref: ${{ needs.build-image.outputs.image-ref }}:${{ github.ref_name }}
