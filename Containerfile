@@ -2,6 +2,7 @@ FROM quay.io/almalinuxorg/atomic-desktop-kde
 
 COPY myos-logo-icon.png myos-logo-icon.svg \
      myos-logo-icon-square.png myos-logo-icon-square.svg \
+     myos-logo-icon-small.png \
      myos-logo-icon.ico myos-logo-icon.icns \
      /usr/share/myos-logos/
 
@@ -17,14 +18,20 @@ RUN set -eux; \
         -exec ln -sf /usr/share/myos-logos/myos-logo-icon-square.png {} \; ; \
     find /usr/share/pixmaps \
         \( -name 'fedora-logo.png' -o -name 'fedora-logo-small.png' \
-        -o -name 'fedora-gdm-logo.png' -o -name 'system-logo-white.png' \) \
+        -o -name 'system-logo-white.png' \) \
         -exec ln -sf /usr/share/myos-logos/myos-logo-icon.png {} \; ; \
+    find /usr/share/pixmaps -name 'fedora-gdm-logo.png' \
+        -exec ln -sf /usr/share/myos-logos/myos-logo-icon-small.png {} \; ; \
     find /usr/share/pixmaps -name 'fedora-logo-sprite.svg' \
         -exec ln -sf /usr/share/myos-logos/myos-logo-icon-square.svg {} \; ; \
     find /usr/share/pixmaps -name 'fedora-logo.ico' \
         -exec ln -sf /usr/share/myos-logos/myos-logo-icon.ico {} \; ; \
     find /usr/share/pixmaps -name 'fedora.icns' \
         -exec ln -sf /usr/share/myos-logos/myos-logo-icon.icns {} \; ; \
+    ln -sf /usr/share/myos-logos/myos-logo-icon-square.svg \
+        /usr/share/icons/hicolor/scalable/apps/start-here.svg; \
+    find /usr/share/plymouth -name 'watermark.png' \
+        -exec ln -sf /usr/share/myos-logos/myos-logo-icon-small.png {} \; ; \
     gtk-update-icon-cache -f -q /usr/share/icons/hicolor
 
 RUN set -eux; \
