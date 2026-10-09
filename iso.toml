@@ -1,7 +1,0 @@
-[customizations.installer.kickstart]
-contents = """
-%post --erroronfail --log=/root/anaconda-post.log
-bootc switch --mutate-in-place --transport registry <IMAGE_SIGNED> <UPDATE_IMAGE_REF>
-
-%end
-"""

@@ -16,7 +16,7 @@ concurrency:
 jobs:
   build-image:
     name: Build image
-    uses: AlmaLinux/atomic-ci/.github/workflows/build-image.yml@v12
+    uses: AlmaLinux/atomic-ci/.github/workflows/build-image.yml@v12.1
     with:
       containerfile: Containerfile
       image-name: ${{ github.event.repository.name }}
@@ -37,15 +37,12 @@ jobs:
     needs: build-image
     # ISOs are heavy, so only build them on the default branch (via push or dispatch).
     if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
-    uses: AlmaLinux/atomic-ci/.github/workflows/build-iso.yml@dev/v12
+    uses: AlmaLinux/atomic-ci/.github/workflows/build-iso.yml@v12.1
     with:
       image: ${{ needs.build-image.outputs.image-ref }}:${{ github.ref_name }}
       image-name: ${{ github.event.repository.name }}
       # Installed systems track the tag build-image.yml pushes for this branch.
       update-origin-ref: ${{ needs.build-image.outputs.image-ref }}:${{ github.ref_name }}
-      # Set to true once a SIGNING_SECRET is configured.
-      update-is-signed: false
-      config-file: ./iso.toml
       platforms: amd64
     secrets:
       REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
