@@ -43,6 +43,7 @@ jobs:
       image-name: ${{ github.event.repository.name }}
       # Installed systems track the tag build-image.yml pushes for this branch.
       update-origin-ref: ${{ needs.build-image.outputs.image-ref }}:${{ github.ref_name }}
+      hook-script: ./iso-hook.sh
       platforms: amd64
     secrets:
       REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}

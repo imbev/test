@@ -30,6 +30,8 @@ RUN set -eux; \
         -exec ln -sf /usr/share/myos-logos/myos-logo-icon.icns {} \; ; \
     ln -sf /usr/share/myos-logos/myos-logo-icon-square.svg \
         /usr/share/icons/hicolor/scalable/apps/start-here.svg; \
+    ln -sf /usr/share/myos-logos/myos-logo-icon.png \
+        /usr/share/anaconda/pixmaps/sidebar-logo.png; \
     find /usr/share/plymouth -name 'watermark.png' \
         -exec ln -sf /usr/share/myos-logos/myos-logo-icon-small.png {} \; ; \
     gtk-update-icon-cache -f -q /usr/share/icons/hicolor
