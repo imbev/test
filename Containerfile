@@ -1,2 +1,2 @@
-FROM quay.io/almalinuxorg/atomic-desktop-gnome
+FROM quay.io/almalinuxorg/atomic-desktop-kde
 
