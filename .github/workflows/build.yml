@@ -16,7 +16,7 @@ concurrency:
 jobs:
   build-image:
     name: Build image
-    uses: AlmaLinux/atomic-ci/.github/workflows/build-image.yml@dev/v12
+    uses: AlmaLinux/atomic-ci/.github/workflows/build-image.yml@v12
     with:
       containerfile: Containerfile
       image-name: ${{ github.event.repository.name }}
