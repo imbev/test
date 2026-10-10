@@ -55,6 +55,14 @@ RUN set -eux; \
         "$f"
 
 RUN set -eux; \
+    mv /usr/share/wallpapers/AlmaLinux_Default /usr/share/wallpapers/MyOS_Default; \
+    ln -sfn MyOS_Default /usr/share/wallpapers/Default; \
+    sed -i \
+        -e 's/AlmaLinux_Default/MyOS_Default/' \
+        -e 's/AlmaLinux Default/MyOS Default/' \
+        /usr/share/wallpapers/MyOS_Default/metadata.json
+
+RUN set -eux; \
     for kdir in /usr/lib/modules/*; do \
         [ -f "$kdir/initramfs.img" ] || continue; \
         dracut -f "$kdir/initramfs.img" "${kdir##*/}"; \
