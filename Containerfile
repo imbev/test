@@ -53,3 +53,9 @@ RUN set -eux; \
         -e 's/^REDHAT_SUPPORT_PRODUCT="AlmaLinux"/REDHAT_SUPPORT_PRODUCT="MyOS"/' \
         -e '/^VARIANT_ID=/d' \
         "$f"
+
+RUN set -eux; \
+    for kdir in /usr/lib/modules/*; do \
+        [ -f "$kdir/initramfs.img" ] || continue; \
+        dracut -f "$kdir/initramfs.img" "${kdir##*/}"; \
+    done
